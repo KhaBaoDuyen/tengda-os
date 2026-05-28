@@ -14,10 +14,12 @@ export default async function DashboardPage() {
 
 
   const seoArticles =
-    await prisma.sEOArticle.findMany();
+    await prisma.sEOArticle.findMany()
+      .catch(() => []);
 
   const videos =
-    await prisma.video.findMany();
+    await prisma.video.findMany()
+      .catch(() => []);
 
   const growth =
     await prisma.growth.findMany({
@@ -25,7 +27,8 @@ export default async function DashboardPage() {
         reportDate: "desc",
       },
       take: 30,
-    });
+    }).catch(() => []);
+
   const seoCount =
     seoArticles.length;
 
