@@ -1,0 +1,59 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model SEOArticle {
+  id        Int       @id @default(autoincrement())
+  title     String
+  keyword   String
+  status    String
+  priority  String    @default("Trung Bình")
+  url       String?
+  dueDate   DateTime?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Video {
+  id          Int      @id @default(autoincrement())
+
+  title       String
+
+  category    String
+  format      String
+
+  content     String?
+
+  status      String
+  priority    String
+
+  publishUrl  String?
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Idea {
+  id        Int      @id @default(autoincrement())
+  title     String
+  type      String
+  createdAt DateTime @default(now())
+}
+
+model Growth {
+  id              Int      @id @default(autoincrement())
+  reportDate      DateTime
+  clicks          Int      @default(0)
+  impressions     Int      @default(0)
+  ctr             Float    @default(0)
+  averagePosition Float    @default(0)
+  articlesCount   Int      @default(0)
+  videosCount     Int      @default(0)
+  leads           Int      @default(0)
+  createdAt       DateTime @default(now())
+}
